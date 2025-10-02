@@ -16,11 +16,11 @@ El flujo completo se ejecuta en un clúster local con **Minikube**.
 
 ## 🛠️ Tecnologías Utilizadas
 
-[![Kubernetes](https://img.shields.io/badge/Kubernetes-Minikube-326CE5?logo=kubernetes&logoColor=white)](https://minikube.sigs.k8s.io/docs/)  
-[![Docker](https://img.shields.io/badge/Docker-Containerization-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)  
-[![Node.js](https://img.shields.io/badge/Node.js-Express-339933?logo=node.js&logoColor=white)](https://nodejs.org/)  
-[![Prometheus](https://img.shields.io/badge/Prometheus-Metrics-E6522C?logo=prometheus&logoColor=white)](https://prometheus.io/)  
-[![Grafana](https://img.shields.io/badge/Grafana-Dashboards-F46800?logo=grafana&logoColor=white)](https://grafana.com/)  
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-Minikube-326CE5?logo=kubernetes&logoColor=white)](https://minikube.sigs.k8s.io/docs/)
+[![Docker](https://img.shields.io/badge/Docker-Containerization-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![Node.js](https://img.shields.io/badge/Node.js-Express-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Prometheus](https://img.shields.io/badge/Prometheus-Metrics-E6522C?logo=prometheus&logoColor=white)](https://prometheus.io/)
+[![Grafana](https://img.shields.io/badge/Grafana-Dashboards-F46800?logo=grafana&logoColor=white)](https://grafana.com/)
 
 
 - **Kubernetes Minikube** → ejecuta el clúster local.  
@@ -36,10 +36,20 @@ El flujo completo se ejecuta en un clúster local con **Minikube**.
 
 ```mermaid
 flowchart LR
-    U[Usuario] -->|Genera tráfico| A[App Node.js]
-    A -->|Expone /metrics| P[Prometheus]
-    P -->|Datos de métricas| G[Grafana]
+    U([👤 Usuario]):::user -->|Genera tráfico| A[(🌐 App Node.js)]:::app
+
+    subgraph K8s[Kubernetes Cluster]
+        A -->|Expone /metrics| P[(📈 Prometheus)]:::prom
+        P -->|Provee métricas| G[(📊 Grafana)]:::graf
+    end
+
     G -->|Dashboard| U
+
+    classDef user fill:#1E90FF,stroke:#333,stroke-width:2px,color:white;
+    classDef app fill:#27AE60,stroke:#333,stroke-width:2px,color:white;
+    classDef prom fill:#E74C3C,stroke:#333,stroke-width:2px,color:white;
+    classDef graf fill:#F39C12,stroke:#333,stroke-width:2px,color:white;
+
 ```
 
 ---
